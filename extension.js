@@ -32,7 +32,7 @@ function checkAndFullScreenWindow() {
     }
 }
 
-export default class Extension {
+export default class thisExtension {
     enable() {
         windowTracker = Shell.WindowTracker.get_default();
         activeWindowChangedId = windowTracker.connect('notify::focus-app', checkAndFullScreenWindow);
