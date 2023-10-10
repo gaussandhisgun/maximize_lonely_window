@@ -1,9 +1,15 @@
-const { Meta, Shell } = imports.gi;
-const Main = imports.ui.main;
+//const { Meta, Shell } = imports.gi;
+import Meta from 'gi://Meta'
+import Shell from 'gi://Shell'
+//const Main = imports.ui.main;
+import * as Main from 'resource:///org/gnome/shell/ui/main.js'
+
 
 let windowTracker, activeWindowChangedId, activeWorkspaceChangedId;
 
 function init() {}
+
+
 
 function enable() {
     windowTracker = Shell.WindowTracker.get_default();
@@ -23,5 +29,19 @@ function checkAndFullScreenWindow() {
 
     if (windowsOnWorkspace.length === 1 && !windowsOnWorkspace[0].meta_window.maximized_horizontally && !windowsOnWorkspace[0].meta_window.maximized_vertically) {
         windowsOnWorkspace[0].meta_window.maximize(Meta.MaximizeFlags.BOTH);
+    }
+}
+
+export default class Extension {
+    enable() {
+        windowTracker = Shell.WindowTracker.get_default();
+        activeWindowChangedId = windowTracker.connect('notify::focus-app', checkAndFullScreenWindow);
+        activeWorkspaceChangedId = global.window_manager.connect('switch-workspace', checkAndFullScreenWindow);
+    }
+
+    disable() {
+        windowTracker.disconnect(activeWindowChangedId);
+        global.window_manager.disconnect(activeWorkspaceChangedId);
+        windowTracker = null;
     }
 }
