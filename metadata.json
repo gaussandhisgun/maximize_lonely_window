@@ -2,9 +2,9 @@
   "description": "Maximize the only window in a workspace",
   "name": "Maximize Lonely Window",
   "shell-version": [
-    "44"
+    "45"
   ],
-  "url": "https://github.com/MrShuster/maximize_lonely_window/",
-  "uuid": "maximize-lonely-window@MrShuster",
+  "url": "https://github.com/gaussandhisgun/maximize_lonely_window/",
+  "uuid": "maximize-lonely-window@gaussandhisgun",
   "version": 2
 }
